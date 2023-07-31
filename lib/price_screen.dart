@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bitcoin_ticker/coin_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -46,15 +48,7 @@ class _PriceScreenState extends State<PriceScreen> {
             alignment: Alignment.center,
             padding: EdgeInsets.only(bottom: 30.0),
             color: Colors.lightBlue,
-            child: CupertinoPicker(
-              itemExtent: 45,
-              onSelectedItemChanged: (int selectedIndex) {
-                setState(() {
-                  selectedCurrencyIndex = selectedIndex;
-                });
-              },
-              children: getCurrencyPickerItems(),
-            ),
+            child: Platform.isIOS ? getIOSPicker() : getPicker(),
           ),
         ],
       ),
@@ -82,4 +76,24 @@ class _PriceScreenState extends State<PriceScreen> {
     }
     return currencyListItems;
   }
+
+  CupertinoPicker getIOSPicker() => CupertinoPicker(
+        itemExtent: 45,
+        onSelectedItemChanged: (int selectedIndex) {
+          setState(() {
+            selectedCurrencyIndex = selectedIndex;
+          });
+        },
+        children: getCurrencyPickerItems(),
+      );
+
+  DropdownButton<String> getPicker() => DropdownButton<String>(
+        value: selectedCurrency,
+        items: getCurrencyListItems(),
+        onChanged: (String? value) {
+          setState(() {
+            selectedCurrency = value!;
+          });
+        },
+      );
 }

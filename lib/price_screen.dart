@@ -44,7 +44,7 @@ class _PriceScreenState extends State<PriceScreen> {
             padding: EdgeInsets.only(bottom: 30.0),
             color: Colors.lightBlue,
             child: DropdownButton<String>(
-              items: getCryptoListItems(),
+              items: getCurrencyListItems(),
               onChanged: (String? value) {
                 print(value);
               },
@@ -55,15 +55,15 @@ class _PriceScreenState extends State<PriceScreen> {
     );
   }
 
-  List<DropdownMenuItem<String>> getCryptoListItems() {
-    List<DropdownMenuItem<String>> cryptoListItems = [];
-    for (String currency in cryptoList) {
-      cryptoListItems.add(DropdownMenuItem(
+  List<DropdownMenuItem<String>> getCurrencyListItems() {
+    List<DropdownMenuItem<String>> currencyListItems = [];
+    for (String currency in currenciesList) {
+      currencyListItems.add(DropdownMenuItem(
         key: Key(currency),
         child: Text(currency),
         value: currency,
       ));
     }
-    return cryptoListItems;
+    return currencyListItems;
   }
 }

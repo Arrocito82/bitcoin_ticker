@@ -10,8 +10,10 @@ class CoinAPIService {
   static Future<Map?> getExchangeRate(
       String baseCurrency, String quoteCurrency) async {
     dynamic response = await http.get(
-        Uri.https('$_kCoinAPIDomainName',
-            '$_kCoinAPIPath/$baseCurrency/$quoteCurrency'),
+        Uri.https(
+          _kCoinAPIDomainName,
+          '$_kCoinAPIPath/$baseCurrency/$quoteCurrency',
+        ),
         headers: {'X-CoinAPI-Key': _kAPIKey});
     if (response.statusCode == HttpStatus.ok) {
       var decodedResponse = jsonDecode(utf8.decode(response.bodyBytes)) as Map;

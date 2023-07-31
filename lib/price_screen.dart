@@ -53,7 +53,7 @@ class _PriceScreenState extends State<PriceScreen> {
           getSingleExchangeRate(
             data['asset_id_base'],
             data['asset_id_quote'],
-            (data['rate']).toStringAsFixed(3),
+            (data['rate']).toStringAsFixed(0),
           )
         ];
       });
@@ -139,6 +139,7 @@ class _PriceScreenState extends State<PriceScreen> {
           setState(() {
             selectedCurrencyIndex = selectedIndex;
           });
+          print(currenciesList[selectedIndex]);
         },
         children: getCurrencyPickerItems(),
       );
@@ -150,6 +151,7 @@ class _PriceScreenState extends State<PriceScreen> {
           setState(() {
             selectedCurrency = value!;
           });
+          setExchangeRates(value!);
         },
       );
 }

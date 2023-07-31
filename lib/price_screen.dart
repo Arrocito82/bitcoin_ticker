@@ -1,5 +1,4 @@
 import 'dart:core';
-import 'dart:io';
 
 import 'package:bitcoin_ticker/CoinAPIService.dart';
 import 'package:bitcoin_ticker/coin_data.dart';
@@ -104,7 +103,8 @@ class _PriceScreenState extends State<PriceScreen> {
             alignment: Alignment.center,
             padding: const EdgeInsets.only(bottom: 30.0),
             color: Colors.lightBlue,
-            child: Platform.isIOS ? getIOSPicker() : getPicker(),
+            child: getIOSPicker(),
+            // child: Platform.isIOS ? getIOSPicker() : getPicker(),
           ),
         ],
       ),
@@ -139,7 +139,7 @@ class _PriceScreenState extends State<PriceScreen> {
           setState(() {
             selectedCurrencyIndex = selectedIndex;
           });
-          print(currenciesList[selectedIndex]);
+          setExchangeRates(currenciesList[selectedIndex]);
         },
         children: getCurrencyPickerItems(),
       );
